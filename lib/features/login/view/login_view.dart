@@ -1,0 +1,137 @@
+import 'package:firebase_aut/core/colors/colors.dart';
+import 'package:firebase_aut/core/components/custom_elevated_button.dart';
+import 'package:firebase_aut/core/components/custom_text_field.dart';
+import 'package:firebase_aut/core/constants/constant_edge_insets.dart';
+import 'package:firebase_aut/core/constants/constant_string.dart';
+import 'package:flutter/material.dart';
+
+import '../../../core/components/custom_text_button.dart';
+
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({Key? key}) : super(key: key);
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  final String logoPath = getFullImgPath("firebase_black.webp");
+  final String projectName = "Firebase Aut. Project";
+  final String orTitle = "OR";
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Padding(
+            padding: ConstantEdgeInsets.paddingOnlyRLT10,
+            child: Container(
+              height: MediaQuery.of(context).size.height * 0.65,
+              width: MediaQuery.of(context).size.width,
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    ProjectColors.firebaseFirstOrange,
+                    ProjectColors.firebaseThirdOrange,
+                    ProjectColors.firebaseSecondOrange,
+                  ],
+                ),
+                borderRadius: BorderRadius.only(
+                  bottomRight: Radius.circular(25),
+                  bottomLeft: Radius.circular(25),
+                  topLeft: Radius.circular(5),
+                  topRight: Radius.circular(5),
+                ),
+              ),
+              child: Card(
+                color: Colors.transparent,
+                shadowColor: Colors.transparent,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: ConstantEdgeInsets.paddingOnlyTop10,
+                      child: Image.asset(
+                        logoPath,
+                        color: ProjectColors.colorWhite,
+                      ),
+                    ),
+                    Padding(
+                      padding: ConstantEdgeInsets.paddingOnlyTop10,
+                      child: Text(
+                        projectName,
+                        style: Theme.of(context).textTheme.headline4?.copyWith(
+                              color: ProjectColors.colorWhite,
+                            ),
+                      ),
+                    ),
+                    const Padding(
+                      padding: ConstantEdgeInsets.paddingOnlyTop35,
+                      child: CustomTextField(
+                          icon: Icon(
+                            Icons.person_outline,
+                          ),
+                          labelText: ConstantString.USER_NAME_HINT,
+                          isObscure: false,
+                          keyboardType: TextInputType.text),
+                    ),
+                    const Padding(
+                      padding: ConstantEdgeInsets.paddingOnlyTop10,
+                      child: CustomTextField(
+                          icon: Icon(
+                            Icons.password,
+                          ),
+                          labelText: ConstantString.PASSWORD_HINT,
+                          isObscure: true,
+                          keyboardType: TextInputType.visiblePassword),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: const [
+                        CustomTextButton(
+                          title: ConstantString.FORGOT_PASS_BUTTON,
+                          color: ProjectColors.colorWhite,
+                        ),
+                        CustomTextButton(
+                          title: ConstantString.HELP_BUTTON,
+                          color: ProjectColors.colorWhite,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          const Padding(
+            padding: ConstantEdgeInsets.paddingOnlyTop35,
+            child: CustomElevatedButton(
+                title: ConstantString.SIGN_IN_BUTTON_TITLE),
+          ),
+          Padding(
+            padding: ConstantEdgeInsets.paddingOnlyTop10,
+            child: Text(
+              orTitle,
+              style: Theme.of(context).textTheme.headline5?.copyWith(
+                    color: ProjectColors.colorGrey400,
+                  ),
+            ),
+          ),
+          const CustomTextButton(
+            title: ConstantString.REGISTER_BUTTON_TITLE,
+            color: ProjectColors.colorGrey400,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+String getFullImgPath(String imgName) {
+  String baseImgPath = "assets/img/";
+  return baseImgPath + imgName;
+}
