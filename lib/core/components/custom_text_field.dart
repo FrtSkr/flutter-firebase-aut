@@ -1,3 +1,4 @@
+import 'package:firebase_aut/core/colors/colors.dart';
 import 'package:firebase_aut/core/constants/constant_edge_insets.dart';
 import 'package:flutter/material.dart';
 
@@ -25,9 +26,15 @@ class CustomTextField extends StatelessWidget {
         obscureText: isObscure,
         decoration: InputDecoration(
           labelText: labelText,
+          labelStyle: Theme.of(context).textTheme.subtitle2?.copyWith(
+                color: ProjectColors.colorGrey400,
+              ),
+          fillColor: ProjectColors.colorWhite,
+          filled: true,
           prefixIcon: icon,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(25),
+            borderSide: BorderSide.none,
           ),
         ),
       ),

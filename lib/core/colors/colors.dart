@@ -6,4 +6,5 @@ class ProjectColors {
   static const Color firebaseSecondOrange = Color(0xFFF6820D);
   static const Color firebaseThirdOrange = Color(0xFFFFCB2B);
   static const Color colorWhite = Colors.white;
+  static const Color colorGrey400 = Color(0xFFBDBDBD);
 }

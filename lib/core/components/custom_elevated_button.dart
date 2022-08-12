@@ -13,9 +13,10 @@ class CustomElevatedButton extends StatelessWidget {
           shape: StadiumBorder(),
           gradient: LinearGradient(
             begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
             colors: [
-              ProjectColors.firebaseFirstOrange,
               ProjectColors.firebaseSecondOrange,
+              ProjectColors.firebaseThirdOrange,
             ],
           )),
       child: ElevatedButton(
@@ -32,6 +33,7 @@ class CustomElevatedButton extends StatelessWidget {
           title,
           style: Theme.of(context).textTheme.subtitle2?.copyWith(
                 color: ProjectColors.colorWhite,
+                fontWeight: FontWeight.bold,
               ),
         ),
       ),

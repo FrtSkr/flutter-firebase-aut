@@ -8,4 +8,8 @@ class ConstantEdgeInsets {
       EdgeInsets.symmetric(vertical: 10);
   static const EdgeInsets paddingHorizontal10 =
       EdgeInsets.symmetric(horizontal: 10);
+  static const EdgeInsets paddingOnlyRLT10 =
+      EdgeInsets.only(right: 10, left: 10, top: 10);
+  static const EdgeInsets paddingOnlyTop10 = EdgeInsets.only(top: 10);
+  static const EdgeInsets paddingOnlyTop35 = EdgeInsets.only(top: 35);
 }
