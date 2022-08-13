@@ -6,6 +6,7 @@ import 'package:firebase_aut/core/constants/constant_string.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/components/custom_text_button.dart';
+import '../../register/view/register_view.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -16,8 +17,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final String logoPath = getFullImgPath("firebase_black.webp");
-  final String projectName = "Firebase Aut. Project";
-  final String orTitle = "OR";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,7 +63,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     Padding(
                       padding: ConstantEdgeInsets.paddingOnlyTop10,
                       child: Text(
-                        projectName,
+                        ConstantString.PROJECT_NAME,
                         style: Theme.of(context).textTheme.headline4?.copyWith(
                               color: ProjectColors.colorWhite,
                             ),
@@ -75,7 +75,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           icon: Icon(
                             Icons.person_outline,
                           ),
-                          labelText: ConstantString.USER_NAME_HINT,
+                          labelText: ConstantString.USER_ID,
                           isObscure: false,
                           keyboardType: TextInputType.text),
                     ),
@@ -85,7 +85,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           icon: Icon(
                             Icons.password,
                           ),
-                          labelText: ConstantString.PASSWORD_HINT,
+                          labelText: ConstantString.PASSWORD,
                           isObscure: true,
                           keyboardType: TextInputType.visiblePassword),
                     ),
@@ -115,15 +115,17 @@ class _LoginScreenState extends State<LoginScreen> {
           Padding(
             padding: ConstantEdgeInsets.paddingOnlyTop10,
             child: Text(
-              orTitle,
+              ConstantString.OR_TEXT,
               style: Theme.of(context).textTheme.headline5?.copyWith(
                     color: ProjectColors.colorGrey400,
                   ),
             ),
           ),
-          const CustomTextButton(
+          CustomTextButton(
             title: ConstantString.REGISTER_BUTTON_TITLE,
             color: ProjectColors.colorGrey400,
+            context: context,
+            widget: const RegisterScreenView(),
           ),
         ],
       ),
