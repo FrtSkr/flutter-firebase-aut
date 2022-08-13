@@ -7,7 +7,6 @@ mixin PageNavigation {
         builder: (context) {
           return widget;
         },
-        fullscreenDialog: true,
         settings: const RouteSettings(),
       ),
     );
