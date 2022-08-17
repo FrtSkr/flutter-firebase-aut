@@ -1,3 +1,4 @@
+import 'package:firebase_aut/core/components/components_style.dart';
 import 'package:firebase_aut/core/navigation/page_navigation.dart';
 import 'package:firebase_aut/features/login/view/login_view.dart';
 import 'package:flutter/material.dart';
@@ -25,9 +26,7 @@ class CustomTextButton extends StatelessWidget {
       },
       child: Text(
         title,
-        style: Theme.of(context).textTheme.subtitle2?.copyWith(
-              color: color,
-            ),
+        style: ComponentStyle.textButtonTextStyle(context, color),
       ),
     );
   }

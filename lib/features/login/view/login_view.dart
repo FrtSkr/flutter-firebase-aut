@@ -1,4 +1,5 @@
 import 'package:firebase_aut/core/colors/colors.dart';
+import 'package:firebase_aut/core/components/components_style.dart';
 import 'package:firebase_aut/core/components/custom_elevated_button.dart';
 import 'package:firebase_aut/core/components/custom_text_field.dart';
 import 'package:firebase_aut/core/constants/constant_edge_insets.dart';
@@ -107,10 +108,18 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
           ),
-          const Padding(
+          Padding(
             padding: ConstantEdgeInsets.paddingOnlyTop35,
             child: CustomElevatedButton(
-                title: ConstantString.SIGN_IN_BUTTON_TITLE),
+              elevatedButton: ElevatedButton(
+                onPressed: () {},
+                style: ComponentStyle.elevatedButtonStyle(),
+                child: Text(
+                  ConstantString.SIGN_IN_BUTTON_TITLE,
+                  style: ComponentStyle.elevatedButtonTextStyle(context),
+                ),
+              ),
+            ),
           ),
           Padding(
             padding: ConstantEdgeInsets.paddingOnlyTop10,

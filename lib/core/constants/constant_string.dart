@@ -13,5 +13,4 @@ class ConstantString {
   static const String EMAIL = "Email";
   static const String LAST_NAME = "Last Name";
   static const String FIRST_NAME = "First Name";
-  static const String CREATE_ACC = "Create Account";
 }
