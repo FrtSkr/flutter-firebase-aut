@@ -11,4 +11,15 @@ mixin PageNavigation {
       ),
     );
   }
+
+  static Future<T?> navigateToWidgetArguments<T>(
+      BuildContext context, Widget widget) {
+    return Navigator.of(context).push<T>(
+      MaterialPageRoute(
+        builder: (context) {
+          return widget;
+        },
+      ),
+    );
+  }
 }

@@ -5,9 +5,10 @@ import 'package:firebase_aut/core/components/custom_text_field.dart';
 import 'package:firebase_aut/core/constants/constant_edge_insets.dart';
 import 'package:firebase_aut/core/constants/constant_string.dart';
 import 'package:firebase_aut/features/register/service/register_service.dart';
-import 'package:firebase_aut/features/users/model/user_model.dart';
-import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
+import '../../users/model/user_model.dart';
 
 class RegisterScreenView extends StatefulWidget {
   const RegisterScreenView({Key? key}) : super(key: key);
@@ -23,7 +24,7 @@ class _RegisterScreenViewState extends State<RegisterScreenView>
   final TextEditingController controllerEmail = TextEditingController();
   final TextEditingController controllerPhone = TextEditingController();
   final TextEditingController controllerPassword = TextEditingController();
-
+  final firebaseAut = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -90,7 +91,7 @@ class _RegisterScreenViewState extends State<RegisterScreenView>
             child: CustomElevatedButton(
               elevatedButton: ElevatedButton(
                 onPressed: () {
-                  final user = User(
+                  final user = UserModel(
                       id: DateTime.now().microsecond.toString() +
                           DateTime.now().millisecond.toString(),
                       name:
@@ -100,6 +101,16 @@ class _RegisterScreenViewState extends State<RegisterScreenView>
                       password: controllerPassword.text);
 
                   RegisterService().createUser(user);
+
+                  firebaseAut.createUserWithEmailAndPassword(
+                      email: controllerEmail.text.trim(),
+                      password: controllerPassword.text.trim());
+
+                  controllerFirstName.clear();
+                  controllerLastName.clear();
+                  controllerEmail.clear();
+                  controllerPhone.clear();
+                  controllerPassword.clear();
 
                   Navigator.pop(context);
                 },

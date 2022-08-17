@@ -4,9 +4,12 @@ import 'package:firebase_aut/core/components/custom_elevated_button.dart';
 import 'package:firebase_aut/core/components/custom_text_field.dart';
 import 'package:firebase_aut/core/constants/constant_edge_insets.dart';
 import 'package:firebase_aut/core/constants/constant_string.dart';
+import 'package:firebase_aut/features/home/view/home_view.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/components/custom_text_button.dart';
+import '../../../core/navigation/page_navigation.dart';
 import '../../register/view/register_view.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -18,7 +21,8 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final String logoPath = getFullImgPath("firebase_black.webp");
-
+  final controllerEmail = TextEditingController();
+  final controllerPass = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,20 +74,22 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                       ),
                     ),
-                    const Padding(
+                    Padding(
                       padding: ConstantEdgeInsets.paddingOnlyTop35,
                       child: CustomTextField(
-                          icon: Icon(
+                          titleController: controllerEmail,
+                          icon: const Icon(
                             Icons.person_outline,
                           ),
-                          labelText: ConstantString.USER_ID,
+                          labelText: ConstantString.EMAIL,
                           isObscure: false,
                           keyboardType: TextInputType.text),
                     ),
-                    const Padding(
+                    Padding(
                       padding: ConstantEdgeInsets.paddingOnlyTop10,
                       child: CustomTextField(
-                          icon: Icon(
+                          titleController: controllerPass,
+                          icon: const Icon(
                             Icons.password,
                           ),
                           labelText: ConstantString.PASSWORD,
@@ -112,7 +118,9 @@ class _LoginScreenState extends State<LoginScreen> {
             padding: ConstantEdgeInsets.paddingOnlyTop35,
             child: CustomElevatedButton(
               elevatedButton: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  singIn(controllerEmail, controllerPass, context);
+                },
                 style: ComponentStyle.elevatedButtonStyle(),
                 child: Text(
                   ConstantString.SIGN_IN_BUTTON_TITLE,
@@ -145,4 +153,26 @@ class _LoginScreenState extends State<LoginScreen> {
 String getFullImgPath(String imgName) {
   String baseImgPath = "assets/img/";
   return baseImgPath + imgName;
+}
+
+singIn(TextEditingController controllerEmail,
+    TextEditingController controllerPass, BuildContext context) {
+  try {
+    FirebaseAuth.instance
+        .signInWithEmailAndPassword(
+            email: controllerEmail.text.trim(),
+            password: controllerPass.text.trim())
+        .then((value) =>
+            FirebaseAuth.instance.authStateChanges().listen((User? user) {
+              if (user != null) {
+                PageNavigation.navigateToWidgetArguments(
+                    context, const HomeScreen());
+                print("Giriş başarılı");
+              } else {
+                print("Kullanıcı yok!!!");
+              }
+            }));
+  } on FirebaseAuthException catch (e) {
+    print("Debug: $e");
+  }
 }
